@@ -93,7 +93,7 @@ function renderArray(array, comparisons = [], swaps = [], sortedIndices = []) {
 
 // 更新統計數據
 function updateStats() {
-    const elapsedTime = Date.now() - state.startTime;
+    const elapsedTime = state.sorting ? Date.now() - state.startTime : 0;
     elements.comparisons.textContent = state.comparisons;
     elements.swaps.textContent = state.swaps;
     elements.executionTime.textContent = `${elapsedTime}ms`;
