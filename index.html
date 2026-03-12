@@ -3,90 +3,495 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>排序演算法視覺化</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>現代網頁範例 | 精緻設計</title>
+    <meta name="description" content="現代、響應式網頁範例，展現最新 Web 設計趨勢">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            --card-shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.2);
+            --text-dark: #2d3748;
+            --text-gray: #718096;
+            --white: #ffffff;
+            --transition-speed: 0.3s;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', ' Oxygen', 'Ubuntu', 'Cantarell', 'Open Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--primary-gradient);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Header Section */
+        header {
+            text-align: center;
+            padding: 80px 20px 60px;
+            color: var(--white);
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 25px;
+            font-weight: 800;
+            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+            letter-spacing: -1px;
+        }
+
+        header h1 span {
+            background: var(--secondary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        header p {
+            font-size: 1.25rem;
+            opacity: 0.95;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* Cards Section */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 35px;
+            padding: 60px 20px;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 24px;
+            padding: 45px 30px;
+            box-shadow: var(--card-shadow);
+            transition: all var(--transition-speed) ease;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--primary-gradient);
+            transform: scaleX(0);
+            transition: transform var(--transition-speed) ease;
+        }
+
+        .card:hover {
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: var(--card-shadow-hover);
+        }
+
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .card-icon {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            display: block;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .card h3 {
+            font-size: 1.75rem;
+            margin-bottom: 18px;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .card p {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: var(--text-gray);
+        }
+
+        /* Features Section */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 45px;
+            padding: 60px 20px;
+        }
+
+        .feature {
+            text-align: center;
+            color: var(--white);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 50px 30px;
+            transition: all var(--transition-speed) ease;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .feature-card:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            font-size: 3.5rem;
+            margin-bottom: 25px;
+            display: block;
+        }
+
+        .feature h3 {
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .feature p {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            opacity: 0.9;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            padding: 80px 20px;
+            animation: fadeInUp 1.2s ease-out;
+        }
+
+        .cta-card {
+            background: var(--white);
+            border-radius: 30px;
+            padding: 70px 50px;
+            box-shadow: var(--card-shadow);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .cta-card h2 {
+            font-size: 2.5rem;
+            margin-bottom: 25px;
+            font-weight: 800;
+            color: var(--text-dark);
+        }
+
+        .cta-card p {
+            font-size: 1.2rem;
+            color: var(--text-gray);
+            margin-bottom: 35px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 18px 45px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all var(--transition-speed) ease;
+            cursor: pointer;
+            border: none;
+            outline: none;
+        }
+
+        .btn-primary {
+            background: var(--primary-gradient);
+            color: var(--white);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.5);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--white);
+            animation: fadeInUp 1.4s ease-out;
+        }
+
+        .social-links {
+            margin: 30px 0;
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+        }
+
+        .social-link {
+            color: var(--white);
+            font-size: 1.5rem;
+            text-decoration: none;
+            transition: transform var(--transition-speed) ease;
+        }
+
+        .social-link:hover {
+            transform: translateY(-5px);
+            opacity: 0.8;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.5rem;
+            }
+            
+            header p {
+                font-size: 1.1rem;
+            }
+            
+            .cards, .features {
+                grid-template-columns: 1fr;
+            }
+            
+            .card {
+                padding: 35px 25px;
+            }
+            
+            .cta-card {
+                padding: 45px 25px;
+            }
+            
+            .cta-card h2 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: transparent;
+            z-index: 1000;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: var(--secondary-gradient);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Sorting Visualizer</h1>
-            <p>排序演算法視覺化演示</p>
-        </header>
-
-        <div class="controls">
-            <div class="control-group">
-                <label for="algorithm">選擇排序演算法：</label>
-                <select id="algorithm">
-                    <option value="bubble">Bubble Sort (氣泡排序)</option>
-                    <option value="quick">Quick Sort (快速排序)</option>
-                    <option value="merge">Merge Sort (合併排序)</option>
-                    <option value="selection">Selection Sort (選擇排序)</option>
-                    <option value="insertion">Insertion Sort (插入排序)</option>
-                </select>
-            </div>
-
-            <div class="control-group">
-                <label for="arraySize">陣列大小：</label>
-                <input type="range" id="arraySize" min="10" max="100" value="30">
-                <span id="arraySizeValue">30</span>
-            </div>
-
-            <div class="control-group">
-                <label for="speed">動畫速度：</label>
-                <input type="range" id="speed" min="1" max="50" value="25">
-                <span id="speedValue">慢</span>
-            </div>
-
-            <div class="button-group">
-                <button id="generateBtn" class="btn primary">生成陣列</button>
-                <button id="sortBtn" class="btn success" disabled>開始排序</button>
-                <button id="stopBtn" class="btn danger" disabled>停止</button>
-            </div>
-        </div>
-
-        <div class="stats">
-            <div class="stat-item">
-                <span class="stat-label">時間複雜度：</span>
-                <span id="timeComplexity" class="stat-value">-</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-label">比較次數：</span>
-                <span id="comparisons" class="stat-value">0</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-label">交換次數：</span>
-                <span id="swaps" class="stat-value">0</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-label">執行時間：</span>
-                <span id="executionTime" class="stat-value">0ms</span>
-            </div>
-        </div>
-
-        <div class="visualization-area">
-            <div id="arrayContainer"></div>
-        </div>
-
-        <div class="legend">
-            <div class="legend-item">
-                <span class="legend-color default"></span>
-                <span>未排序</span>
-            </div>
-            <div class="legend-item">
-                <span class="legend-color comparing"></span>
-                <span>比較中</span>
-            </div>
-            <div class="legend-item">
-                <span class="legend-color swapping"></span>
-                <span>交換中</span>
-            </div>
-            <div class="legend-item">
-                <span class="legend-color sorted"></span>
-                <span>已完成排序</span>
-            </div>
-        </div>
+    <!-- Progress Bar -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
     </div>
 
-    <script src="script.js"></script>
+    <div class="container">
+        <header>
+            <h1>✨ 歡迎來到 <span>現代網頁</span></h1>
+            <p>這是一個使用最新 HTML5、CSS3 和現代設計原則打造的響應式網頁範例。簡單、優雅、功能完整。</p>
+        </header>
+
+        <div class="cards">
+            <div class="card">
+                <span class="card-icon">🚀</span>
+                <h3>快速效能</h3>
+                <p>使用最有效的 HTML5 和 CSS3 技術，確保您的網頁在所有裝置上都能快速載入並流暢運行。優化的代碼結構，帶來卓越的性能體驗。</p>
+            </div>
+
+            <div class="card">
+                <span class="card-icon">📱</span>
+                <h3>響應式設計</h3>
+                <p>自動適應各種螢幕尺寸，無論是桌面電腦、平板還是手機，都能呈現完美的視覺效果。靈活的网格系統，確保最佳顯示效果。</p>
+            </div>
+
+            <div class="card">
+                <span class="card-icon">🎨</span>
+                <h3>現代美學</h3>
+                <p>採用現代設計趨勢，包括漸變色、陰影效果和流暢的動畫，創造出令人印象深刻的視覺體驗。優雅的設計語言，提升用戶體驗。</p>
+            </div>
+        </div>
+
+        <div class="features">
+            <div class="feature">
+                <div class="feature-card">
+                    <span class="feature-icon">💎</span>
+                    <h3>精緻細節</h3>
+                    <p>每一個元素都經過精心設計，確保整體的一致性和專業感。從字體選擇到間距安排，每一處細節都展現我們的專業精神。</p>
+                </div>
+            </div>
+
+            <div class="feature">
+                <div class="feature-card">
+                    <span class="feature-icon">🔒</span>
+                    <h3>安全性高</h3>
+                    <p>使用標準的 Web 技術，確保網頁的安全性和穩定性。遵循最佳實踐，保護用戶數據和隱私。</p>
+                </div>
+            </div>
+
+            <div class="feature">
+                <div class="feature-card">
+                    <span class="feature-icon">⚡</span>
+                    <h3>易於維護</h3>
+                    <p>程式碼結構清晰，便於未來的維護和擴充。模塊化的設計，讓您能輕鬆添加新功能或修改現有內容。</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <div class="cta-card">
+                <h2>準備好開始您的專案了嗎？</h2>
+                <p>我們的現代網頁解決方案能為您的業務帶來卓越的用戶體驗和轉換率。立即聯繫我們，讓我們幫助您實現數位轉型。</p>
+                <button class="btn btn-primary" onclick="showNotification()">開始專案</button>
+            </div>
+        </div>
+
+        <footer>
+            <h3>✨ 歡迎再次 visit</h3>
+            <p>© 2024 現代網頁範例 | 使用純 HTML、CSS 和 JavaScript 建構</p>
+            <div class="social-links">
+                <a href="#" class="social-link">📘</a>
+                <a href="#" class="social-link">🐦</a>
+                <a href="#" class="social-link">📷</a>
+                <a href="#" class="social-link">💼</a>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // 進度條效果
+        window.addEventListener('scroll', function() {
+            const progressBar = document.getElementById('progressBar');
+            const scrollPosition = window.scrollY;
+            const windowHeight = document.body.scrollHeight - window.innerHeight;
+            
+            const progress = (scrollPosition / windowHeight) * 100;
+            progressBar.style.width = progress + '%';
+        });
+
+        // 平滑滾動
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // 通知功能
+        function showNotification() {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                background: var(--primary-gradient);
+                color: white;
+                padding: 20px 30px;
+                border-radius: 15px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+                z-index: 1000;
+                animation: slideIn 0.5s ease-out;
+                max-width: 300px;
+            `;
+            notification.innerHTML = `
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <span style="font-size: 1.5rem;">🎉</span>
+                    <div>
+                        <strong style="display: block; margin-bottom: 5px;">專案已啟動！</strong>
+                        <span style="font-size: 0.9rem; opacity: 0.9;">我們會盡快與您聯繫。</span>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.5s ease-out';
+                setTimeout(() => notification.remove(), 500);
+            }, 3000);
+        }
+
+        // 點擊卡片動畫
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.card');
+            
+            cards.forEach((card, index) => {
+                // 鼠標移入
+                card.addEventListener('mouseenter', function() {
+                    card.style.transform = 'translateY(-15px) scale(1.03)';
+                });
+                
+                // 鼠標移出
+                card.addEventListener('mouseleave', function() {
+                    card.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+
+            // 預加載動畫
+            const cardsElements = document.querySelectorAll('.card, .feature-card');
+            cardsElements.forEach((element, index) => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(30px)';
+                element.style.transition = `all 0.6s ease ${index * 0.1}s`;
+                
+                setTimeout(() => {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }, 500);
+            });
+        });
+    </script>
 </body>
 </html>
