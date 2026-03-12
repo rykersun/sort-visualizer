@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>排序演算法視覺化</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Sorting Visualizer</h1>
+            <p>排序演算法視覺化演示</p>
+        </header>
+
+        <div class="controls">
+            <div class="control-group">
+                <label for="algorithm">選擇排序演算法：</label>
+                <select id="algorithm">
+                    <option value="bubble">Bubble Sort (氣泡排序)</option>
+                    <option value="quick">Quick Sort (快速排序)</option>
+                    <option value="merge">Merge Sort (合併排序)</option>
+                    <option value="selection">Selection Sort (選擇排序)</option>
+                    <option value="insertion">Insertion Sort (插入排序)</option>
+                </select>
+            </div>
+
+            <div class="control-group">
+                <label for="arraySize">陣列大小：</label>
+                <input type="range" id="arraySize" min="10" max="100" value="30">
+                <span id="arraySizeValue">30</span>
+            </div>
+
+            <div class="control-group">
+                <label for="speed">動畫速度：</label>
+                <input type="range" id="speed" min="1" max="50" value="25">
+                <span id="speedValue">慢</span>
+            </div>
+
+            <div class="button-group">
+                <button id="generateBtn" class="btn primary">生成陣列</button>
+                <button id="sortBtn" class="btn success" disabled>開始排序</button>
+                <button id="stopBtn" class="btn danger" disabled>停止</button>
+            </div>
+        </div>
+
+        <div class="stats">
+            <div class="stat-item">
+                <span class="stat-label">時間複雜度：</span>
+                <span id="timeComplexity" class="stat-value">-</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">比較次數：</span>
+                <span id="comparisons" class="stat-value">0</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">交換次數：</span>
+                <span id="swaps" class="stat-value">0</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">執行時間：</span>
+                <span id="executionTime" class="stat-value">0ms</span>
+            </div>
+        </div>
+
+        <div class="visualization-area">
+            <div id="arrayContainer"></div>
+        </div>
+
+        <div class="legend">
+            <div class="legend-item">
+                <span class="legend-color default"></span>
+                <span>未排序</span>
+            </div>
+            <div class="legend-item">
+                <span class="legend-color comparing"></span>
+                <span>比較中</span>
+            </div>
+            <div class="legend-item">
+                <span class="legend-color swapping"></span>
+                <span>交換中</span>
+            </div>
+            <div class="legend-item">
+                <span class="legend-color sorted"></span>
+                <span>已完成排序</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
