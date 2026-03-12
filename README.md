@@ -19,11 +19,3 @@ UI 要現代、漂亮，使用深色主題
 用純 HTML/CSS/JavaScript，不需要後端
 所有檔案放在 ~/dgx-side-project/sort-visualizer 資料夾
 ```
-
-## 功能特點
-
-- **多種排序演算法**：支援 Bubble Sort、Quick Sort、Merge Sort、Selection Sort、Insertion Sort
-- **動態控制**：可調整陣列大小（10-100）和動畫速度
-- **視覺化演示**：即時顯示排序過程中的比較、交換操作
-- **統計數據**：追踪比較次數、交換次數和執行時間
-- **深色主題**：現代化 UI 設計，保護視力並提供良好體驗
